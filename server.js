@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const app = express();
 const fs = require('fs');
+const port = process.env.PORT || 3000;
+console.log(port);
 // templates
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
@@ -24,17 +26,16 @@ app.use((req, res, next) => {
   });
   next();
 });
-app.use((req, res, next) => {
-  res.render('maintenance.hbs'); // no routes will work
-});
+// app.use((req, res, next) => {
+//   res.render('maintenance.hbs'); // no routes will work
+// });
 
 // only needed express,app and app.use for creating a back end
 let greeting = 'good';
 app.get('/', (req, res) => {
   // res.send('<h1>Home</h1>');
   res.render('home.hbs', {
-    greeting:
-      greeting + ' ' + (new Date().getHours > 12 ? 'evening' : 'morning'),
+    greeting: greeting + ' ' + (new Date().getHours > 12 ? 'evening' : 'morning'),
     pageTitle: 'Home Page'
   });
 });
@@ -57,6 +58,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('server runnning on port 3000');
+app.listen(port, (port) => {
+  console.log(`server runnning on ${port}`);
 });
