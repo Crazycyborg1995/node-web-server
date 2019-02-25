@@ -51,7 +51,11 @@ app.get('/About', (req, res) => {
     currentYear: new Date().getFullYear()
   });
 });
-
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
+  })
+})
 app.get('/bad', (req, res) => {
   res.send({
     errorMessage: 'the page is not found'
